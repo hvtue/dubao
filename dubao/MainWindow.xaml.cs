@@ -211,7 +211,7 @@ namespace dubao
                                                             var numone = 0;
                                                             if (int.TryParse(ch.ToString(), out numone))
                                                             {
-                                                            await Task.Run(() => { insertNumOne(selectvalue.Id, date, numone, 1); });
+                                                            await Task.Run(() => { insertNumOne(selectvalue.Id, date, numone, 1); });// tue fig github
                                                             }
                                                         }
                                                     }
