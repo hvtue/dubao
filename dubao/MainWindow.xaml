@@ -17,9 +17,96 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
             <Label Content="Nhập số"></Label>
-            <TextBox x:Name="txtnhapso" Text="{Binding nhapso, Mode=TwoWay}" Width="120"></TextBox>
+            <TextBox x:Name="txtnhapso" Text="{Binding Songay, Mode=TwoWay}" Width="120" Background="Red" FontSize="16"></TextBox>
         </DockPanel>
-        <Button Content="Chay" Grid.Row="0" Grid.Column="1" Width="70" HorizontalAlignment="Left" Click="Button_Click" CommandParameter="{Binding Text, ElementName=txtnhapso}"></Button>
-        <TextBox Text="{Binding result, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" MaxLines="100" MinLines="5"></TextBox>
+        <DockPanel  Grid.Row="0" Grid.Column="1">
+            <Button Content="Chay" Width="70" HorizontalAlignment="Left" Click="Button_Click" CommandParameter="{Binding Text, ElementName=txtnhapso}" Visibility="Hidden"></Button>
+            <Button Content="AI Dự đoán" Width="70" HorizontalAlignment="Left" Click="Button_Click_2"></Button>
+            <Label Content="{Binding SelectedItem.Name, ElementName=cobdai}" Background="DodgerBlue" FontSize="18" FontFamily="Arial" FontWeight="Bold" FontStyle="Italic"></Label>
+        </DockPanel>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Content="Xác Suất tối thiểu đánh trúng là: "></Label>
+                <Label Content="{Binding xstrung}" Background="Red" FontSize="16" FontWeight="Bold"></Label>
+            </DockPanel>           
+            
+            <!--<TextBox Text="{Binding result, Mode=TwoWay}"  MaxLines="100" MinLines="5"></TextBox>-->
+            <!--<Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>                    
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>-->
+
+                <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding listcolection}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <!--<ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DataGrid ItemsSource="{Binding}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Số" Binding="{Binding num}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Số lần ra" Binding="{Binding count}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Xác suất" Binding="{Binding xs}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>-->
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Số" DisplayMemberBinding="{Binding num}"></GridViewColumn>
+                            <GridViewColumn Header="Số lần" DisplayMemberBinding="{Binding count}"></GridViewColumn>
+                            <GridViewColumn Header="xac suất" DisplayMemberBinding="{Binding xs}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            <ListView ItemsSource="{Binding ListPrediction}" Grid.Row="1" Grid.Column="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Số" DisplayMemberBinding="{Binding Bi}"></GridViewColumn>
+                        <GridViewColumn Header="Dự đoán" DisplayMemberBinding="{Binding P}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <!--</Grid>-->
+        </Grid>
+       
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <ComboBox ItemsSource="{Binding listDai}" x:Name="cobdai" SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <!--<Grid.DataContext>
+                                <local:modelDai></local:modelDai>
+                            </Grid.DataContext>-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Text="{Binding Id}"></TextBox>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}"></TextBlock>
+                            <TextBox Grid.Column="2" Text="{Binding Url}"></TextBox>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical"></VirtualizingStackPanel>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Button Content="Get data" Click="Button_Click_1"></Button>
+        </StackPanel>
     </Grid>
 </Window>

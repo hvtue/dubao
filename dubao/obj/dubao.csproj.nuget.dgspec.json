@@ -45,7 +45,27 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Accord.MachineLearning": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "Accord.Statistics": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.ML": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "Microsoft.ML.AutoML": {
+              "target": "Package",
+              "version": "[0.20.1, )"
+            },
+            "Microsoft.ML.FastTree": {
               "target": "Package",
               "version": "[2.0.1, )"
             },
@@ -68,6 +88,10 @@
             "Microsoft.ML.Probabilistic.Visualizers.Windows": {
               "target": "Package",
               "version": "[0.4.2301.301, )"
+            },
+            "System.Data.OleDb": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             }
           },
           "imports": [
